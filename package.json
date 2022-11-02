@@ -1,7 +1,7 @@
 {
   "name": "inz-backend",
   "version": "0.0.1",
-   "engines": {
+  "engines": {
     "node": "14.19.0"
   },
   "description": "",
