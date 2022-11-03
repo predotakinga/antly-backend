@@ -32,6 +32,6 @@ RUN npm i --only=production
 
 COPY . .
 
-COPY --from=development /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/dist ./dist
 
 CMD ["node", "dist/main"]
