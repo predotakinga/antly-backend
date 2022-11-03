@@ -19,3 +19,5 @@ FROM node:16.16.0-alpine As development
 COPY --from=build /usr/src/app .
 
 CMD npm run start:dev
+
+EXPOSE 5432
