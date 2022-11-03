@@ -6,4 +6,4 @@ release:
   command:
     - npx prisma migrate dev && npx prisma db push
 run:
-  web: npm run start:dev
+  web: docker-compose up
