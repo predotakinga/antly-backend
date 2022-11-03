@@ -1,9 +1,5 @@
 build:
   docker:
     web: Dockerfile
-release:
-  image: web
-  command:
-    - npx prisma migrate dev && npx prisma db push
 run:
   web: docker-compose up
