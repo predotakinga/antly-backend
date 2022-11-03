@@ -19,3 +19,19 @@ FROM node:16.16.0-alpine As development
 COPY --from=build /usr/src/app .
 
 CMD npm run start:dev
+
+WORKDIR /usr/src/app
+
+COPY package.json package-lock.json ./
+
+COPY prisma ./src/prisma/
+
+RUN npm i glob rimraf
+
+RUN npm i --only=production
+
+COPY . .
+
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["node", "dist/main"]
