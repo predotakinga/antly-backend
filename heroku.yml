@@ -5,4 +5,5 @@ setup:
 build:
   docker:
     web: Dockerfile
-run: '/bin/sh -c docker-compose\ up'
+run:
+  web: /bin/sh -c docker-compose\ up
