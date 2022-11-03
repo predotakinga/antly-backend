@@ -28,10 +28,10 @@ COPY prisma ./src/prisma/
 
 RUN npm i glob rimraf
 
-RUN npm i --only=production
+RUN npm i
 
 COPY . .
 
-COPY --from=build ./dist
+COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/main"]
