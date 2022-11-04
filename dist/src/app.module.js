@@ -11,11 +11,21 @@ const common_1 = require("@nestjs/common");
 const offers_module_1 = require("./offers/offers.module");
 const auth_module_1 = require("./auth/auth.module");
 const lesson_module_1 = require("./lesson/lesson.module");
+const config_1 = require("@nestjs/config");
+const prisma_module_1 = require("../prisma/prisma.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [offers_module_1.OffersModule, auth_module_1.AuthModule, lesson_module_1.LessonModule],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                envFilePath: [`.env.stage.${process.env.STAGE}`],
+            }),
+            offers_module_1.OffersModule,
+            auth_module_1.AuthModule,
+            lesson_module_1.LessonModule,
+            prisma_module_1.PrismaModule
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;
