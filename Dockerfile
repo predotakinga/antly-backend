@@ -8,7 +8,7 @@ COPY prisma ./prisma/
 
 COPY .env ./
 
-RUN npm i
+RUN npm install
 
 COPY . .
 
