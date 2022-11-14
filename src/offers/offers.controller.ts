@@ -31,7 +31,7 @@ export class OffersController {
 
   @Post()
   createOffer(
-    @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price }: OfferDto,
+    @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto,
     @GetUser() user: User,
   ): Promise<OfferDto> {
     return this.offersService.createOffer(
@@ -40,6 +40,7 @@ export class OffersController {
         descriptionShort, descriptionLong, location, imageUrl,
         subject,
         price,
+        range,
       },
       user,
     );

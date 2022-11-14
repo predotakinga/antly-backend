@@ -30,6 +30,7 @@ model Offer {
   price            Int
   location         String
   imageUrl         String
+  range            String
   teacher          User     @relation(fields: [teacherName], references: [username])
   teacherName      String
   Lesson           Lesson[]

@@ -21,4 +21,7 @@ export class OfferDto {
 
   @IsNotEmpty()
   price: number;
+
+  @IsNotEmpty()
+  range: string;
 }
