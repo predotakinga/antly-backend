@@ -25,11 +25,11 @@ export class OffersService {
   }
 
   createOffer(
-    @Body() { title, description, subject, price }: OfferDto,
+    @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price }: OfferDto,
     user: User,
   ): Promise<OfferDto> {
     return this.prismaService.offer.create({
-      data: { title, description, subject, price, teacherName: user.username }
+      data: { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, teacherName: user.username }
     });
   }
 

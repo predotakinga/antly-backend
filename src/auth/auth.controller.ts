@@ -12,7 +12,7 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly jwtDecode: JwtDecode,
     private readonly jwtStrategy: JwtStrategy,
-  ) {}
+  ) { }
 
   @Post('/signup')
   signUp(@Body() authCredentialsDto: AuthCredentialsDto) {

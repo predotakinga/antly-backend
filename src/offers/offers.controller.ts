@@ -31,13 +31,13 @@ export class OffersController {
 
   @Post()
   createOffer(
-    @Body() { title, description, subject, price }: OfferDto,
+    @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price }: OfferDto,
     @GetUser() user: User,
   ): Promise<OfferDto> {
     return this.offersService.createOffer(
       {
         title,
-        description,
+        descriptionShort, descriptionLong, location, imageUrl,
         subject,
         price,
       },

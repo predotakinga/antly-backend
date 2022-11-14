@@ -22,14 +22,17 @@ model Lesson {
 //OFFER
 
 model Offer {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  subject     String
-  price       Int
-  teacher     User     @relation(fields: [teacherName], references: [username])
-  teacherName String
-  Lesson      Lesson[]
+  id               Int      @id @default(autoincrement())
+  title            String
+  descriptionShort String
+  descriptionLong  String
+  subject          String
+  price            Int
+  location         String
+  imageUrl         String
+  teacher          User     @relation(fields: [teacherName], references: [username])
+  teacherName      String
+  Lesson           Lesson[]
 }
 
 //USER

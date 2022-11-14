@@ -5,10 +5,19 @@ export class OfferDto {
   title: string;
 
   @IsNotEmpty()
-  description: string;
+  descriptionShort: string;
+
+  @IsNotEmpty()
+  descriptionLong: string;
 
   @IsNotEmpty()
   subject: string;
+
+  @IsNotEmpty()
+  location: string;
+
+  @IsNotEmpty()
+  imageUrl: string;
 
   @IsNotEmpty()
   price: number;

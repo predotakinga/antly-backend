@@ -21,7 +21,7 @@ export class AuthService {
     private readonly prismaService: PrismaService,
     private jwtService: JwtService,
     private jwtDecode: JwtDecode,
-  ) {}
+  ) { }
 
   async signUp(
     @Body() { username, password, name, surname }: AuthCredentialsDto,
