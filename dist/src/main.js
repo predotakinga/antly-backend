@@ -16,6 +16,7 @@ async function bootstrap() {
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);
+    app.enableCors();
     app.use(cookieParser());
     const port = process.env.PORT || 3000;
     await app.listen(port, () => console.log("listening on port 3000"));

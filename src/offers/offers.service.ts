@@ -5,8 +5,9 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { Offer, User } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+import { GetOffersFilterDto } from './dto/get-offers-filter.dto';
 import { OfferDto } from './dto/offer.dto';
 
 @Injectable()
@@ -15,6 +16,27 @@ export class OffersService {
 
   getAllOffers(): Promise<OfferDto[]> {
     return this.prismaService.offer.findMany();
+  }
+
+  async getOffersWithFilters(filterDto: GetOffersFilterDto): Promise<OfferDto[]> {
+    const { subject, range } = filterDto;
+
+    let offers = await this.getAllOffers();
+
+    if (subject) {
+      offers = offers.filter((offer) => {
+        if (offer.subject.includes(subject)) {
+          return true;
+        }
+        return false;
+      })
+    }
+
+    if (range) {
+
+    }
+
+    return offers;
   }
 
   async getOfferById(@Param('id', ParseIntPipe) id: number): Promise<OfferDto> {

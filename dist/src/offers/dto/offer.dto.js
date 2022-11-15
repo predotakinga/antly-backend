@@ -20,14 +20,30 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], OfferDto.prototype, "description", void 0);
+], OfferDto.prototype, "descriptionShort", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], OfferDto.prototype, "descriptionLong", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], OfferDto.prototype, "subject", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], OfferDto.prototype, "location", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], OfferDto.prototype, "imageUrl", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
 ], OfferDto.prototype, "price", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], OfferDto.prototype, "range", void 0);
 exports.OfferDto = OfferDto;
 //# sourceMappingURL=offer.dto.js.map

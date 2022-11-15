@@ -16,24 +16,31 @@ exports.OffersController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const get_user_decorator_1 = require("../auth/get-user.decorator");
+const get_offers_filter_dto_1 = require("./dto/get-offers-filter.dto");
 const offer_dto_1 = require("./dto/offer.dto");
 const offers_service_1 = require("./offers.service");
 let OffersController = class OffersController {
     constructor(offersService) {
         this.offersService = offersService;
     }
-    getAllOffers() {
-        return this.offersService.getAllOffers();
+    getOffers(filterDto) {
+        if (Object.keys(filterDto).length) {
+            return this.offersService.getOffersWithFilters(filterDto);
+        }
+        else {
+            return this.offersService.getAllOffers();
+        }
     }
     getOfferById(id) {
         return this.offersService.getOfferById(id);
     }
-    createOffer({ title, description, subject, price }, user) {
+    createOffer({ title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }, user) {
         return this.offersService.createOffer({
             title,
-            description,
+            descriptionShort, descriptionLong, location, imageUrl,
             subject,
             price,
+            range,
         }, user);
     }
     deleteOffer(id) {
@@ -42,10 +49,11 @@ let OffersController = class OffersController {
 };
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [get_offers_filter_dto_1.GetOffersFilterDto]),
     __metadata("design:returntype", Promise)
-], OffersController.prototype, "getAllOffers", null);
+], OffersController.prototype, "getOffers", null);
 __decorate([
     (0, common_1.Get)('/:id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

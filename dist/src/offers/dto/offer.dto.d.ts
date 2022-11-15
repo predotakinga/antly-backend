@@ -1,6 +1,10 @@
 export declare class OfferDto {
     title: string;
-    description: string;
+    descriptionShort: string;
+    descriptionLong: string;
     subject: string;
+    location: string;
+    imageUrl: string;
     price: number;
+    range: string;
 }

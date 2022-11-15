@@ -23,15 +23,30 @@ let OffersService = class OffersService {
     getAllOffers() {
         return this.prismaService.offer.findMany();
     }
+    async getOffersWithFilters(filterDto) {
+        const { subject, range } = filterDto;
+        let offers = await this.getAllOffers();
+        if (subject) {
+            offers = offers.filter((offer) => {
+                if (offer.subject.includes(subject)) {
+                    return true;
+                }
+                return false;
+            });
+        }
+        if (range) {
+        }
+        return offers;
+    }
     async getOfferById(id) {
         const offer = await this.prismaService.offer.findUnique({ where: { id } });
         if (!offer)
             throw new common_1.NotFoundException(`Not found any offer of id = ${id}`);
         return offer;
     }
-    createOffer({ title, description, subject, price }, user) {
+    createOffer({ title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }, user) {
         return this.prismaService.offer.create({
-            data: { title, description, subject, price, teacherName: user.username }
+            data: { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range, teacherName: user.username }
         });
     }
     async deleteOffer(id) {

@@ -1,6 +1,9 @@
 import { IsString } from 'class-validator';
 
 export class GetOffersFilterDto {
-  @IsString()
+  // @IsString()
   subject?: string;
+
+  // @IsString()
+  range?: string;
 }

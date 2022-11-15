@@ -6,11 +6,13 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { GetOffersFilterDto } from './dto/get-offers-filter.dto';
 import { OfferDto } from './dto/offer.dto';
 import { OffersService } from './offers.service';
 
@@ -20,8 +22,13 @@ export class OffersController {
   constructor(private offersService: OffersService) { }
 
   @Get()
-  getAllOffers(): Promise<OfferDto[]> {
-    return this.offersService.getAllOffers();
+  getOffers(@Query() filterDto: GetOffersFilterDto): Promise<OfferDto[]> {
+    if (Object.keys(filterDto).length) {
+      return this.offersService.getOffersWithFilters(filterDto);
+    } else {
+      return this.offersService.getAllOffers();
+    }
+
   }
 
   @Get('/:id')
