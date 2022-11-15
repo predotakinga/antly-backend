@@ -35,8 +35,16 @@ let OffersService = class OffersService {
             });
         }
         if (range) {
+            if (range) {
+                offers = offers.filter((offer) => {
+                    if (offer.range.includes(range)) {
+                        return true;
+                    }
+                    return false;
+                });
+            }
+            return offers;
         }
-        return offers;
     }
     async getOfferById(id) {
         const offer = await this.prismaService.offer.findUnique({ where: { id } });

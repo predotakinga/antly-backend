@@ -33,10 +33,17 @@ export class OffersService {
     }
 
     if (range) {
+      if (range) {
+        offers = offers.filter((offer) => {
+          if (offer.range.includes(range)) {
+            return true;
+          }
+          return false;
+        })
+      }
 
+      return offers;
     }
-
-    return offers;
   }
 
   async getOfferById(@Param('id', ParseIntPipe) id: number): Promise<OfferDto> {
