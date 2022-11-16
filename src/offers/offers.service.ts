@@ -19,7 +19,7 @@ export class OffersService {
   }
 
   async getOffersWithFilters(filterDto: GetOffersFilterDto): Promise<OfferDto[]> {
-    const { subject, range } = filterDto;
+    const { subject, range, location } = filterDto;
 
     let offers = await this.getAllOffers();
 
@@ -42,7 +42,18 @@ export class OffersService {
         })
       }
 
-      return offers;
+      if (location) {
+        if (location) {
+          offers = offers.filter((offer) => {
+            if (offer.location.includes(location)) {
+              return true;
+            }
+            return false;
+          })
+        }
+
+        return offers;
+      }
     }
   }
 

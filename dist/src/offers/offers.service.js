@@ -24,7 +24,7 @@ let OffersService = class OffersService {
         return this.prismaService.offer.findMany();
     }
     async getOffersWithFilters(filterDto) {
-        const { subject, range } = filterDto;
+        const { subject, range, location } = filterDto;
         let offers = await this.getAllOffers();
         if (subject) {
             offers = offers.filter((offer) => {
@@ -43,7 +43,17 @@ let OffersService = class OffersService {
                     return false;
                 });
             }
-            return offers;
+            if (location) {
+                if (location) {
+                    offers = offers.filter((offer) => {
+                        if (offer.location.includes(location)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+                return offers;
+            }
         }
     }
     async getOfferById(id) {

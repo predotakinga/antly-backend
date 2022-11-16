@@ -6,4 +6,6 @@ export class GetOffersFilterDto {
 
   // @IsString()
   range?: string;
+
+  location?: string;
 }
