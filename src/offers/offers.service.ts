@@ -64,6 +64,16 @@ export class OffersService {
     return offer;
   }
 
+  //NOWOŚCI
+
+  async getOffersByTeacherName(@Param('teachername') teacherName: string): Promise<OfferDto[]> {
+    const offers = await this.prismaService.offer.findMany({ where: { teacherName } });
+    if (!offers)
+      throw new NotFoundException(`Not found any offer of teacher name = ${teacherName}`);
+    return offers;
+  }
+
+
   createOffer(
     @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto,
     user: User,

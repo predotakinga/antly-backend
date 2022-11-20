@@ -34,6 +34,9 @@ let OffersController = class OffersController {
     getOfferById(id) {
         return this.offersService.getOfferById(id);
     }
+    getOffersByTeacherName(teacherName) {
+        return this.offersService.getOffersByTeacherName(teacherName);
+    }
     createOffer({ title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }, user) {
         return this.offersService.createOffer({
             title,
@@ -61,6 +64,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], OffersController.prototype, "getOfferById", null);
+__decorate([
+    (0, common_1.Get)('/teacher/:teachername'),
+    __param(0, (0, common_1.Param)('teachername')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], OffersController.prototype, "getOffersByTeacherName", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

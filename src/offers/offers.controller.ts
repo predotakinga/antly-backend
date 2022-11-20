@@ -36,6 +36,13 @@ export class OffersController {
     return this.offersService.getOfferById(id);
   }
 
+  //NOWOŚCI
+
+  @Get('/teacher/:teachername')
+  getOffersByTeacherName(@Param('teachername') teacherName: string): Promise<OfferDto[]> {
+    return this.offersService.getOffersByTeacherName(teacherName);
+  }
+
   @Post()
   createOffer(
     @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto,

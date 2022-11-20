@@ -62,6 +62,12 @@ let OffersService = class OffersService {
             throw new common_1.NotFoundException(`Not found any offer of id = ${id}`);
         return offer;
     }
+    async getOffersByTeacherName(teacherName) {
+        const offers = await this.prismaService.offer.findMany({ where: { teacherName } });
+        if (!offers)
+            throw new common_1.NotFoundException(`Not found any offer of teacher name = ${teacherName}`);
+        return offers;
+    }
     createOffer({ title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }, user) {
         return this.prismaService.offer.create({
             data: { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range, teacherName: user.username }
@@ -80,6 +86,12 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], OffersService.prototype, "getOfferById", null);
+__decorate([
+    __param(0, (0, common_1.Param)('teachername')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], OffersService.prototype, "getOffersByTeacherName", null);
 __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
