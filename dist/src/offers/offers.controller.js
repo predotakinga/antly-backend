@@ -46,6 +46,11 @@ let OffersController = class OffersController {
             range,
         }, user);
     }
+    updateOffer(id, { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }) {
+        return this.offersService.updateOffer(id, {
+            title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range
+        });
+    }
     deleteOffer(id) {
         return this.offersService.deleteOffer(id);
     }
@@ -79,6 +84,14 @@ __decorate([
     __metadata("design:paramtypes", [offer_dto_1.OfferDto, Object]),
     __metadata("design:returntype", Promise)
 ], OffersController.prototype, "createOffer", null);
+__decorate([
+    (0, common_1.Patch)('/:id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, offer_dto_1.OfferDto]),
+    __metadata("design:returntype", Promise)
+], OffersController.prototype, "updateOffer", null);
 __decorate([
     (0, common_1.Delete)('/:id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

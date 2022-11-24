@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -58,6 +59,16 @@ export class OffersController {
       },
       user,
     );
+  }
+
+  @Patch('/:id')
+  updateOffer(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto,
+  ): Promise<OfferDto> {
+    return this.offersService.updateOffer(id, {
+      title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range
+    });
   }
 
   @Delete('/:id')

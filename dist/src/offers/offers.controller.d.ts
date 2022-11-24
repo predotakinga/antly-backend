@@ -9,5 +9,6 @@ export declare class OffersController {
     getOfferById(id: number): Promise<OfferDto>;
     getOffersByTeacherName(teacherName: string): Promise<OfferDto[]>;
     createOffer({ title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto, user: User): Promise<OfferDto>;
+    updateOffer(id: number, { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto): Promise<OfferDto>;
     deleteOffer(id: number): Promise<OfferDto>;
 }

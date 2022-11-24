@@ -83,6 +83,16 @@ export class OffersService {
     });
   }
 
+  updateOffer(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }: OfferDto,
+  ): Promise<OfferDto> {
+    return this.prismaService.offer.update({
+      data: { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range },
+      where: { id },
+    });
+  }
+
   async deleteOffer(@Param('id', ParseIntPipe) id: number): Promise<OfferDto> {
     const offer = await this.getOfferById(id);
 

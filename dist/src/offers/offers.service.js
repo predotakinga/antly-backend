@@ -73,6 +73,12 @@ let OffersService = class OffersService {
             data: { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range, teacherName: user.username }
         });
     }
+    updateOffer(id, { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range }) {
+        return this.prismaService.offer.update({
+            data: { title, descriptionShort, descriptionLong, location, imageUrl, subject, price, range },
+            where: { id },
+        });
+    }
     async deleteOffer(id) {
         const offer = await this.getOfferById(id);
         if (!offer)
@@ -98,6 +104,13 @@ __decorate([
     __metadata("design:paramtypes", [offer_dto_1.OfferDto, Object]),
     __metadata("design:returntype", Promise)
 ], OffersService.prototype, "createOffer", null);
+__decorate([
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, offer_dto_1.OfferDto]),
+    __metadata("design:returntype", Promise)
+], OffersService.prototype, "updateOffer", null);
 __decorate([
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
