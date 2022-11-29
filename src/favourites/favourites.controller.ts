@@ -11,7 +11,7 @@ export class FavouritesController {
     constructor(private favouriteService: FavouritesService) { }
 
     @Get('/:username')
-    getFavouritesByUser(@Param('username') userName: string): Promise<FavouritesDto[]> {
+    getFavouritesByUser(@Param('username') userName: string) {
         return this.favouriteService.getFavouritesByUser(userName);
     }
 
@@ -19,7 +19,7 @@ export class FavouritesController {
     addToFavourites(
         @Body() { offerId }: FavouritesDto,
         @GetUser() user: User,
-    ): Promise<FavouritesDto> {
+    ) {
         return this.favouriteService.addToFavourites(
             { offerId },
             user,

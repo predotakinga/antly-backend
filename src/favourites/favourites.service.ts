@@ -7,11 +7,18 @@ import { FavouritesDto } from './dto/favourites.dto';
 export class FavouritesService {
     constructor(private readonly prismaService: PrismaService) { }
 
-    async getFavouritesByUser(@Param('username') userName: string): Promise<FavouritesDto[]> {
+    async getFavouritesByUser(@Param('username') userName: string) {
         const favourites = await this.prismaService.favourites.findMany({ where: { userName } });
         if (!favourites)
             throw new NotFoundException(`Not found any favourites of user name = ${userName}`);
-        return favourites;
+        const lala = favourites.map(e => e.offerId);
+        const offers = await this.prismaService.offer.findMany({
+            where: {
+                id: { in: lala },
+            }
+        })
+        console.log(offers);
+        return offers;
     }
 
     addToFavourites(
