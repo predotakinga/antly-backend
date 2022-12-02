@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/auth/get-user.decorator';
@@ -25,4 +25,10 @@ export class FavouritesController {
             user,
         )
     }
+
+    // @Delete('/:userName/:offerId')
+    // deleteOfferFromFavourites(@Param('offerId', ParseIntPipe) offerId: number, @Param('userName') userName: string): Promise<FavouritesDto> {
+    //     return this.favouriteService.deleteOfferFromFavourites(offerId, userName);
+    // }
+
 }

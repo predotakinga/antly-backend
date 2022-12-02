@@ -5,7 +5,7 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-import { Offer, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { GetOffersFilterDto } from './dto/get-offers-filter.dto';
 import { OfferDto } from './dto/offer.dto';
