@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, 
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { OfferDto } from 'src/offers/dto/offer.dto';
 import { FavouritesDto } from './dto/favourites.dto';
 import { FavouritesService } from './favourites.service';
 
@@ -26,9 +27,9 @@ export class FavouritesController {
         )
     }
 
-    // @Delete('/:userName/:offerId')
-    // deleteOfferFromFavourites(@Param('offerId', ParseIntPipe) offerId: number, @Param('userName') userName: string): Promise<FavouritesDto> {
-    //     return this.favouriteService.deleteOfferFromFavourites(offerId, userName);
-    // }
+    @Delete('/:userName/:offerId')
+    deleteOfferFromFavourites(@Param('offerId', ParseIntPipe) offerId: number, @Param('userName') userName: string): Promise<FavouritesDto> {
+        return this.favouriteService.deleteOfferFromFavourites(offerId, userName);
+    }
 
 }

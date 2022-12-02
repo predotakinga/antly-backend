@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,8 +6,6 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-//OFFER
 
 model Offer {
   id               Int          @id @default(autoincrement())
@@ -22,20 +17,18 @@ model Offer {
   location         String
   imageUrl         String
   range            String
-  teacher          User         @relation(fields: [teacherName], references: [username])
   teacherName      String
+  teacher          User         @relation(fields: [teacherName], references: [username])
   Favourites       Favourites[]
 }
 
 model Favourites {
   id       Int    @id @default(autoincrement())
-  user     User   @relation(fields: [userName], references: [username])
   userName String
-  Offer    Offer  @relation(fields: [offerId], references: [id])
   offerId  Int
+  Offer    Offer  @relation(fields: [offerId], references: [id])
+  user     User   @relation(fields: [userName], references: [username])
 }
-
-//USER
 
 model User {
   id         Int          @id @default(autoincrement())
@@ -43,6 +36,6 @@ model User {
   password   String
   name       String
   surname    String
-  Offer      Offer[]
   Favourites Favourites[]
+  Offer      Offer[]
 }

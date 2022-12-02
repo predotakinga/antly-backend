@@ -1,4 +1,4 @@
-import { Body, Injectable, NotFoundException, Param, ParseIntPipe } from '@nestjs/common';
+import { Body, Injectable, Logger, NotFoundException, Param, ParseIntPipe } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { FavouritesDto } from './dto/favourites.dto';
@@ -7,12 +7,6 @@ import { FavouritesDto } from './dto/favourites.dto';
 export class FavouritesService {
     constructor(private readonly prismaService: PrismaService) { }
 
-    // addToFavourites(
-    //     @Body() { offerId }: FavouritesDto, 
-    //     user: User,
-    // ): Promise<FavouritesDto> {
-
-    // }
 
     async getFavouritesByUser(@Param('username') userName: string) {
         const favourites = await this.prismaService.favourites.findMany({ where: { userName } });
@@ -24,6 +18,9 @@ export class FavouritesService {
                 id: { in: favouritesArray },
             }
         })
+        offers.forEach(offer => {
+            return offer["favouritesId"] = favourites.filter(favourite => favourite.offerId === offer.id)[0].id
+        })
         return offers;
     }
 
@@ -31,18 +28,19 @@ export class FavouritesService {
         @Body() { offerId }: FavouritesDto,
         user: User,
     ): Promise<FavouritesDto> {
+        const offerProps = this.prismaService.offer.findUnique({ where: { id: offerId } })
+        // console.log(offerProps);
         return this.prismaService.favourites.create({
             data: { offerId, userName: user.username }
         });
     }
 
-    // async deleteOfferFromFavourites
-    //     (@Param('offerId', ParseIntPipe) offerId: number, @Param('userName') userName: string): Promise<FavouritesDto> {
-    //     const favourites = await this.getFavouritesByUser(userName);
+    async deleteOfferFromFavourites(@Param('id', ParseIntPipe) id: number, username: string): Promise<FavouritesDto> {
+        const offer = await this.getFavouritesByUser(username);
 
+        if (!offer)
+            throw new NotFoundException(`Not found any offer of id = ${id}`);
+        return this.prismaService.favourites.delete({ where: { id } });
+    }
 
-    //     if (!favourites)
-    //         throw new NotFoundException(`Not found any offer of id = ${offerId}`);
-    //     return this.prismaService.favourites.delete({ where: { offerId } });
-    // }
 }
