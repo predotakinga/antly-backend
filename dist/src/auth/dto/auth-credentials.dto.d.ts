@@ -3,4 +3,6 @@ export declare class AuthCredentialsDto {
     password: string;
     name: string;
     surname: string;
+    telephone: string;
+    email: string;
 }

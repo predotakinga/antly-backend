@@ -8,6 +8,7 @@ export declare class AuthController {
     private readonly jwtDecode;
     private readonly jwtStrategy;
     constructor(authService: AuthService, jwtDecode: JwtDecode, jwtStrategy: JwtStrategy);
+    getUserByUserName(username: string): Promise<UserCredentialsDto>;
     signUp(authCredentialsDto: AuthCredentialsDto): Promise<void>;
     signIn(userCredentialsDto: UserCredentialsDto): Promise<{
         accessToken: string;

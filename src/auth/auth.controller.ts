@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
@@ -13,6 +13,12 @@ export class AuthController {
     private readonly jwtDecode: JwtDecode,
     private readonly jwtStrategy: JwtStrategy,
   ) { }
+
+  @Get('/:username')
+  getUserByUserName(@Param('username') username: string): Promise<UserCredentialsDto> {
+    return this.authService.getUserByUserName(username);
+  }
+
 
   @Post('/signup')
   signUp(@Body() authCredentialsDto: AuthCredentialsDto) {

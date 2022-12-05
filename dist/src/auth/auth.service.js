@@ -26,19 +26,25 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
         this.jwtDecode = jwtDecode;
     }
-    async signUp({ username, password, name, surname }) {
+    async getUserByUserName(username) {
+        const user = await this.prismaService.user.findUnique({ where: { username } });
+        if (!user)
+            throw new common_1.NotFoundException(`Not found any user of username = ${username}`);
+        return user;
+    }
+    async signUp({ username, password, name, surname, telephone, email }) {
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
         await this.prismaService.user
             .create({
-            data: { username, password: hashedPassword, name, surname },
+            data: { username, password: hashedPassword, name, surname, telephone, email },
         })
             .catch((err) => {
             if (err.code === 'P2002')
                 throw new common_1.ConflictException('This username is already taken.');
             else {
                 return this.prismaService.user.create({
-                    data: { username, password: hashedPassword, name, surname },
+                    data: { username, password: hashedPassword, name, surname, telephone, email },
                 });
             }
         });
@@ -57,6 +63,12 @@ let AuthService = class AuthService {
         }
     }
 };
+__decorate([
+    __param(0, (0, common_1.Param)('username')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AuthService.prototype, "getUserByUserName", null);
 __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

@@ -25,6 +25,9 @@ let AuthController = class AuthController {
         this.jwtDecode = jwtDecode;
         this.jwtStrategy = jwtStrategy;
     }
+    getUserByUserName(username) {
+        return this.authService.getUserByUserName(username);
+    }
     signUp(authCredentialsDto) {
         return this.authService.signUp(authCredentialsDto);
     }
@@ -32,6 +35,13 @@ let AuthController = class AuthController {
         return this.authService.signIn(userCredentialsDto);
     }
 };
+__decorate([
+    (0, common_1.Get)('/:username'),
+    __param(0, (0, common_1.Param)('username')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getUserByUserName", null);
 __decorate([
     (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),

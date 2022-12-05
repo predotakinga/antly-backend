@@ -8,7 +8,8 @@ export declare class AuthService {
     private jwtService;
     private jwtDecode;
     constructor(prismaService: PrismaService, jwtService: JwtService, jwtDecode: JwtDecode);
-    signUp({ username, password, name, surname }: AuthCredentialsDto): Promise<void>;
+    getUserByUserName(username: string): Promise<UserCredentialsDto>;
+    signUp({ username, password, name, surname, telephone, email }: AuthCredentialsDto): Promise<void>;
     signIn({ username, password }: UserCredentialsDto): Promise<{
         accessToken: string;
     }>;

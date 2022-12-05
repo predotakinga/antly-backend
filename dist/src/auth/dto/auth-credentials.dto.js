@@ -37,5 +37,17 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AuthCredentialsDto.prototype, "surname", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(9),
+    (0, class_validator_1.MaxLength)(9),
+    __metadata("design:type", String)
+], AuthCredentialsDto.prototype, "telephone", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AuthCredentialsDto.prototype, "email", void 0);
 exports.AuthCredentialsDto = AuthCredentialsDto;
 //# sourceMappingURL=auth-credentials.dto.js.map

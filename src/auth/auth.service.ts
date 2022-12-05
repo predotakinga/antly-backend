@@ -2,6 +2,8 @@ import {
   Body,
   ConflictException,
   Injectable,
+  NotFoundException,
+  Param,
   Req,
   Res,
   UnauthorizedException,
@@ -22,6 +24,13 @@ export class AuthService {
     private jwtService: JwtService,
     private jwtDecode: JwtDecode,
   ) { }
+
+  async getUserByUserName(@Param('username') username: string): Promise<UserCredentialsDto> {
+    const user = await this.prismaService.user.findUnique({ where: { username } });
+    if (!user)
+      throw new NotFoundException(`Not found any user of username = ${username}`);
+    return user;
+  }
 
   async signUp(
     @Body() { username, password, name, surname, telephone, email }: AuthCredentialsDto,
