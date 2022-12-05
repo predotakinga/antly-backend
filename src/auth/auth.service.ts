@@ -24,21 +24,21 @@ export class AuthService {
   ) { }
 
   async signUp(
-    @Body() { username, password, name, surname }: AuthCredentialsDto,
+    @Body() { username, password, name, surname, telephone, email }: AuthCredentialsDto,
   ) {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
     await this.prismaService.user
       .create({
-        data: { username, password: hashedPassword, name, surname },
+        data: { username, password: hashedPassword, name, surname, telephone, email },
       })
       .catch((err) => {
         if (err.code === 'P2002')
           throw new ConflictException('This username is already taken.');
         else {
           return this.prismaService.user.create({
-            data: { username, password: hashedPassword, name, surname },
+            data: { username, password: hashedPassword, name, surname, telephone, email },
           });
         }
       });

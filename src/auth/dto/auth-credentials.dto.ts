@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class AuthCredentialsDto {
   @IsNotEmpty()
@@ -20,4 +20,16 @@ export class AuthCredentialsDto {
   @IsNotEmpty()
   @IsString()
   surname: string;
+
+
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(9)
+  @MaxLength(9)
+  telephone: string;
+
+
+  @IsNotEmpty()
+  @IsString()
+  email: string;
 }

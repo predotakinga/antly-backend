@@ -36,6 +36,8 @@ model User {
   password   String
   name       String
   surname    String
+  telephone  String
+  email      String
   Favourites Favourites[]
   Offer      Offer[]
 }
