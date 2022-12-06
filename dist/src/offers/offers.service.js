@@ -81,9 +81,10 @@ let OffersService = class OffersService {
     }
     async deleteOffer(id) {
         const offer = await this.getOfferById(id);
+        await this.prismaService.favourites.deleteMany({ where: { offerId: id } });
         if (!offer)
             throw new common_1.NotFoundException(`Not found any offer of id = ${id}`);
-        return this.prismaService.offer.delete({ where: { id } });
+        return (this.prismaService.offer.delete({ where: { id } }));
     }
 };
 __decorate([

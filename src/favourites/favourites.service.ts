@@ -28,8 +28,6 @@ export class FavouritesService {
         @Body() { offerId }: FavouritesDto,
         user: User,
     ): Promise<FavouritesDto> {
-        const offerProps = this.prismaService.offer.findUnique({ where: { id: offerId } })
-        // console.log(offerProps);
         return this.prismaService.favourites.create({
             data: { offerId, userName: user.username }
         });

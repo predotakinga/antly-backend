@@ -19,14 +19,6 @@ model Offer {
   range            String
   teacherName      String
   teacher          User         @relation(fields: [teacherName], references: [username])
-  // teacherFirstName String
-  // teacher          User         @relation(fields: [teacherName], references: [name])
-  // teacherLastName  String
-  // teacher          User         @relation(fields: [teacherName], references: [surname])
-  // teacherTelephone String
-  // teacher          User         @relation(fields: [teacherName], references: [telephone])
-  // teacherEmail     String
-  // teacher          User         @relation(fields: [teacherName], references: [email])
   Favourites       Favourites[]
 }
 
